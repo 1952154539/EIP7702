@@ -16,7 +16,7 @@ import EIP7702DelegatorABI from '../abi/EIP7702Delegator.json'
 import TokenBankABI from '../abi/TokenBank.json'
 import MyTokenABI from '../abi/MyToken.json'
 
-const DELEGATOR_ADDRESS = '0x63c0c19a282a1B52b07dD5a65b58948A07DAE32B'
+const DELEGATOR_ADDRESS = '0xb1cE7f79d6c0789e00DE7927214b48bddb8e43de'
 const RPC_URL = import.meta.env.VITE_RPC_URL || 'https://sepolia.drpc.org'
 
 export default function useEIP7702() {
@@ -65,15 +65,16 @@ export default function useEIP7702() {
           transport: http(RPC_URL),
         })
 
-        const nonce = await publicClient.getTransactionCount({
+        const accountNonce = await publicClient.getTransactionCount({
           address: account.address,
         })
 
         // Step 1: Sign EIP-7702 authorization
+        // When self-sponsoring, auth nonce must be account.nonce + 1
         const authorization = await signAuthorization(walletClient, {
           contractAddress: DELEGATOR_ADDRESS,
           chainId: sepolia.id,
-          nonce,
+          nonce: accountNonce + 1,
         })
 
         // Step 2: Encode approve calldata

@@ -68,7 +68,7 @@ export default function App() {
       <footer className="border-t border-gray-800 py-4 text-center text-gray-600 text-xs space-x-4">
         <span>TokenBank DApp</span>
         <span>·</span>
-        <span>EIP-7702 Delegator: 0x63c0c19a...A07DAE32B</span>
+        <span>EIP-7702 Delegator: 0xb1cE7f79...8e43de</span>
         <span>·</span>
         <span>Sepolia Testnet</span>
       </footer>
